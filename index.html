@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia Vida - Chandler, Arizona</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blue: '#4100F5',
+            mint: '#9BF0E1',
+            heaven: '#509bf5',
+            white: '#FFFFFF',
+            black: '#000000'
+          },
+          screens: {
+            'xs': '320px',    // Small phones
+            'sm': '375px',    // Large phones
+            'md': '768px',    // Tablets
+            'lg': '1024px',   // Laptops
+            'xl': '1280px',   // Desktop
+            '2xl': '1536px',  // Large Desktop
+            '3xl': '1920px',  // TVs
+            '4xl': '2560px'   // Large TVs
+          },
+          container: {
+            center: true,
+            padding: {
+              DEFAULT: '1rem',
+              xs: '1rem',
+              sm: '1.5rem',
+              md: '2rem',
+              lg: '3rem',
+              xl: '4rem',
+              '2xl': '5rem',
+              '3xl': '6rem',
+              '4xl': '8rem'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8));
+      width: 100%;
+      position: relative;
+    }
+
+    .hero-section {
+      background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/640x480');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+    }
+
+    @media (min-width: 375px) {
+      .hero-section {
+        background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/768x480');
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero-section {
+        background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/1024x768');
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-section {
+        background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/1280x720');
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .hero-section {
+        background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/1536x864');
+      }
+    }
+
+    @media (min-width: 1920px) {
+      .hero-section {
+        background-image: linear-gradient(rgba(65, 0, 245, 0.8), rgba(65, 0, 245, 0.8)), url('https://placehold.co/1920x1080');
+      }
+    }
+
+    .navbar {
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background-color: #000000;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+
+    /* Menú móvil actualizado */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: #161616;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px;
+      height: 64px;
+      background-color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .logo-white {
+      height: 50px;
+      width: auto;
+    }
+
+    .logo-black {
+      height: 40px;
+      width: auto;
+    }
+
+    /* Animaciones */
+    .animate {
+      opacity: 0;
+      transition: all 0.8s ease-out;
+    }
+
+    .slide-left {
+      transform: translateX(-50px);
+    }
+
+    .slide-right {
+      transform: translateX(50px);
+    }
+
+    .slide-up {
+      transform: translateY(50px);
+    }
+
+    .fade-in {
+      opacity: 0;
+    }
+
+    .animate.active {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+
+    /* Retraso en las animaciones */
+    .delay-200 {
+      transition-delay: 0.2s;
+    }
+
+    .delay-400 {
+      transition-delay: 0.4s;
+    }
+
+    .delay-600 {
+      transition-delay: 0.6s;
+    }
+
+    /* Animaciones para el menú móvil */
+    .menu-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition-delay: calc(var(--delay) * 0.1s);
+    }
+
+    .mobile-menu.active .menu-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <header class="navbar fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="container mx-auto flex items-center justify-between px-4 py-4">
+      <a href="#" class="flex items-center">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iv-logo-2017-white-bKnH2Y0XBCnCcGPvkaRyoUyu1J1pD5.png"
+          alt="Iglesia Vida Logo" class="logo-white">
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-6">
+        <a href="#" class="text-white hover:text-heaven">Nosotros</a>
+        <a href="#" class="text-white hover:text-heaven">Grupos Vida</a>
+        <a href="#" class="text-white hover:text-heaven">Eventos</a>
+        <a href="#" class="text-white hover:text-heaven">Conectar</a>
+        <a href="#" class="rounded-xl bg-white px-6 py-2 text-blue hover:bg-heaven hover:text-white">Planea tu
+          Visita</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="text-white lg:hidden" id="mobile-menu-button" aria-label="Toggle menu">
+        <i class='bx bx-menu text-2xl'></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation - Actualizado a pantalla completa -->
+    <div class="mobile-menu lg:hidden">
+      <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">
+        <i class='bx bx-x text-2xl'></i>
+      </button>
+
+      <div class="mobile-menu-links">
+        <img
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iv-logo-2017-white-bKnH2Y0XBCnCcGPvkaRyoUyu1J1pD5.png"
+          alt="Iglesia Vida Logo" class="logo-white mb-8 menu-item" style="--delay: 0">
+
+        <a href="#" class="py-2 text-white text-2xl hover:text-heaven menu-item" style="--delay: 1">Nosotros</a>
+        <a href="#" class="py-2 text-white text-2xl hover:text-heaven menu-item" style="--delay: 2">Grupos Vida</a>
+        <a href="#" class="py-2 text-white text-2xl hover:text-heaven menu-item" style="--delay: 3">Eventos</a>
+        <a href="#" class="py-2 text-white text-2xl hover:text-heaven menu-item" style="--delay: 4">Conectar</a>
+        <a href="#"
+          class="mt-4 rounded-xl bg-white px-8 py-3 text-blue hover:bg-white hover:text-blue text-center menu-item"
+          style="--delay: 5">Planea
+          tu Visita</a>
+      </div>
+
+      <div class="absolute bottom-8 left-0 w-full text-center">
+        <div class="flex justify-center space-x-6 mb-4 menu-item" style="--delay: 6">
+          <a href="#" class="text-white hover:text-heaven">
+            <i class='bx bxl-facebook text-2xl'></i>
+          </a>
+          <a href="#" class="text-white hover:text-heaven">
+            <i class='bx bxl-instagram text-2xl'></i>
+          </a>
+          <a href="#" class="text-white hover:text-heaven">
+            <i class='bx bxl-youtube text-2xl'></i>
+          </a>
+          <a href="#" class="text-white hover:text-heaven">
+            <i class='bx bxl-whatsapp text-2xl'></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section - Updated Layout -->
+    <section class="hero-section relative flex items-center">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <div class="animate slide-up">
+            <h1
+              class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-bold text-white leading-tight mb-4 xs:mb-6 sm:mb-8">
+              Encuentra tu lugar<br>
+              con personas<br>
+              que aman a<br>
+              Jesús.
+            </h1>
+            <p class="text-white text-lg xs:text-xl sm:text-2xl mb-8 xs:mb-10 sm:mb-12">
+              Somos una Comunidad de Creyentes de todos los Ámbitos de la Vida, y cuyas puertas están abiertas para
+              TODOS.
+            </p>
+            <div class="flex flex-col gap-4 max-w-sm mx-auto">
+              <a href="#"
+                class="rounded-xl bg-white px-6 xs:px-8 py-4 xs:py-5 text-blue hover:bg-heaven hover:text-white text-center text-base xs:text-lg">
+                Planea tu Visita
+              </a>
+              <a href="#"
+                class="rounded-xl border border-white px-6 xs:px-8 py-4 xs:py-5 text-white hover:bg-white hover:text-blue text-center text-base xs:text-lg">
+                Conecta con Nosotros
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="bg-white py-16 xs:py-20 sm:py-24 md:py-32">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-3xl text-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 601 602"
+            preserveAspectRatio="xMidYMid meet" class="mx-auto mb-8 animate slide-up">
+            <g transform="translate(0.000000,602.000000) scale(0.100000,-0.100000)" fill="#4100F5" stroke="none">
+              <path
+                d="M2751 6009 c-1059 -94 -1975 -718 -2441 -1664 -227 -460 -320 -887 -307 -1415 9 -377 68 -677 200 -1015 144 -370 362 -707 647 -999 538 -552 1211 -859 1985 -906 726 -44 1441 181 2035 640 124 96 385 357 490 490 330 417 542 907 620 1435 30 201 37 540 16 745 -104 977 -653 1818 -1508 2309 -328 188 -705 313 -1103 366 -145 19 -491 27 -634 14z m-523 -1803 c23 -12 81 -137 392 -835 314 -706 368 -821 385 -818 15 2 92 166 385 822 293 656 372 822 391 832 26 14 383 17 429 4 14 -4 31 -18 39 -32 13 -23 -17 -91 -577 -1308 -325 -706 -599 -1292 -608 -1302 -26 -29 -109 -26 -128 4 -8 12 -278 597 -601 1300 -526 1145 -586 1281 -576 1303 6 14 21 29 33 34 13 5 110 9 216 9 149 1 199 -2 220 -13z">
+              </path>
+            </g>
+          </svg>
+          <h2 class="mb-6 xs:mb-8 text-3xl xs:text-4xl sm:text-4xl font-bold text-blue animate slide-up">...Para que
+            tengan vida en abundancia.</h2>
+          <p class="mb-6 xs:mb-8 text-base xs:text-lg text-gray-700 animate slide-up delay-200">
+            Somos una Comunidad de Creyentes de todos los Ámbitos de la Vida, y cuyas puertas están abiertas para TODOS.
+          </p>
+          <p class="mb-10 xs:mb-12 text-base xs:text-lg text-gray-700 animate slide-up delay-400">
+            Una Iglesia Hispana ubicada en Chandler, Arizona.
+          </p>
+          <a href="./nosotros.html"
+            class="rounded-xl bg-blue px-6 xs:px-8 py-4 xs:py-5 text-white hover:bg-heaven inline-block animate slide-up delay-600 text-base xs:text-lg">
+            Quienes Somos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planea tu Visita -->
+    <section class="bg-heaven bg-opacity-20 relative">
+      <div class="hidden md:block absolute left-0 top-0 w-1/2 h-full">
+        <img src="https://placehold.co/800x800" alt="Grupo de personas conversando" class="w-full h-full object-cover">
+      </div>
+      <div class="container mx-auto px-4 py-16 xs:py-20 sm:py-24">
+        <div class="grid md:grid-cols-2 items-center">
+          <!-- Empty div for spacing on mobile -->
+          <div></div>
+          <!-- Content - Always on the right -->
+          <div class="animate slide-right col-start-2">
+            <div class="text-center ml-5 md:text-left">
+              <p class="text-sm uppercase tracking-wider text-blue mb-2">10:00 A.M. y 12:00 P.M. LOS DOMINGOS</p>
+              <h2 class="mb-6 text-3xl xs:text-4xl font-bold text-blue">Planea tu Visita</h2>
+              <p class="mb-8 text-base xs:text-lg text-gray-700">
+                Visitar una nueva iglesia por primera vez puede sentirse intimidante, pero estamos aquí para hacer que
+                tu
+                experiencia sea acogedora y cómoda. Esto es lo que puedes esperar cuando nos visites en Chandler,
+                Arizona.
+              </p>
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 justify-center md:justify-start">
+                  <!-- <i class='bx bx-time text-blue text-xl'></i>
+                  <p class="text-gray-700 text-base xs:text-lg">Domingos a las 10AM y 12PM</p> -->
+                </div>
+                <div class="flex items-center gap-3 justify-center md:justify-start">
+                  <i class='bx bx-map text-blue text-xl'></i>
+                  <p class="text-gray-700 text-base sm:text-sm md:text-lg">3002 N Arizona Ave. #5 Chandler, Arizona</p>
+                </div>
+              </div>
+              <div class="flex justify-center md:justify-start">
+                <a href="#"
+                  class="mt-8 rounded-xl bg-blue px-6 xs:px-8 py-4 xs:py-5 text-white hover:bg-heaven inline-block text-base xs:text-lg">
+                  Planea tu Visita
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Staff & Events Section -->
+    <section class="bg-white py-16 xs:py-20 sm:py-24">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 md:gap-0 gap-8">
+          <!-- Staff & Leaders -->
+          <div class="relative animate slide-left">
+            <div class="relative h-[400px] w-full">
+              <img src="https://placehold.co/800x600" alt="Miembros del equipo conversando"
+                class="w-full h-full object-cover">
+            </div>
+            <div class="mt-8 px-4">
+              <p class="text-sm uppercase tracking-wider text-blue mb-2">CONOCE NUESTRO EQUIPO</p>
+              <h3 class="mb-4 text-2xl xs:text-3xl font-bold text-blue">Nuestro Pastor</h3>
+              <p class="mb-6 text-base xs:text-lg text-gray-700">
+                Conoce a nuestro Pastor que están aquí para ayudarte en tu camino de fe.
+              </p>
+              <a href="#"
+                class="rounded-xl border border-blue px-6 py-2 text-blue hover:bg-blue hover:text-white inline-block text-base xs:text-lg">
+                Conoce a Nuestro Pastor
+              </a>
+            </div>
+          </div>
+
+          <!-- Que esta pasando -->
+          <div class="relative animate slide-right">
+            <div class="relative h-[400px] w-full">
+              <img src="https://placehold.co/800x600" alt="Personas en discusión" class="w-full h-full object-cover">
+            </div>
+            <div class="mt-8 px-4">
+              <p class="text-sm uppercase tracking-wider text-blue mb-2">NUESTRO CALENDARIO</p>
+              <h3 class="mb-4 text-2xl xs:text-3xl font-bold text-blue">¿Qué está pasando en Iglesia Vida?</h3>
+              <p class="mb-6 text-base xs:text-lg text-gray-700">
+                Descubre los próximos eventos para saber qué está sucediendo e involucrarte con nuestra comunidad.
+              </p>
+              <a href="#"
+                class="rounded-xl border border-blue px-6 py-2 text-blue hover:bg-blue hover:text-white inline-block text-base xs:text-lg">
+                Ver Eventos
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps Section -->
+    <section class="bg-heaven relative">
+      <div class="hidden md:block absolute right-0 top-0 w-1/2 h-full">
+        <img src="https://placehold.co/800x800" alt="Grupo de personas conversando" class="w-full h-full object-cover">
+      </div>
+      <div class="container mx-auto px-4 py-16 xs:py-20 sm:py-24">
+        <div class="grid md:grid-cols-2 items-center">
+          <!-- Content - Always on the left -->
+          <div class="animate slide-left">
+            <div class="text-center md:text-left">
+              <p class="text-sm uppercase tracking-wider text-white mb-2">ENCUENTRA TU LUGAR</p>
+              <h2 class="mb-6 text-3xl xs:text-4xl font-bold text-white">Próximos Pasos</h2>
+              <p class="mb-8 text-base xs:text-lg text-white">
+                Descubre cómo puedes formar parte de nuestra comunidad asistiendo a nuestros servicios y uniéndote a
+                grupos
+                pequeños.
+              </p>
+              <div class="flex justify-center md:justify-start">
+                <a href="#"
+                  class="rounded-xl bg-white px-6 xs:px-8 py-4 xs:py-5 text-blue hover:bg-blue hover:text-white inline-block text-base xs:text-lg">
+                  Comenzar
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Empty div for spacing on mobile -->
+          <div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Giving Section -->
+    <section class="bg-black py-24 text-center">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+          <h2 class="text-5xl xs:text-6xl font-bold text-white mb-8">Aporta a nuestro movimiento.</h2>
+          <p class="text-lg xs:text-xl text-white mb-6">
+            En Iglesia Vida es nuestro deseo alcanzar vidas para Cristo a través de Servicios Relevantes, Grupos
+            Pequeños, Misiones y más.
+          </p>
+          <p class="text-lg xs:text-xl text-white mb-12">
+            Esto es posible por la ayuda de Dios y tus diezmos y ofrendas.
+          </p>
+          <p class="text-sm uppercase tracking-wider text-white mb-6">Formas de Dar</p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#"
+              class="rounded-xl bg-white px-8 py-4 text-black hover:bg-blue hover:text-white inline-block text-lg">
+              En línea
+            </a>
+            <a href="#"
+              class="rounded-xl bg-white px-8 py-4 text-black hover:bg-blue hover:text-white inline-block text-lg">
+              Por texto
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue py-16 text-white">
+    <div class="container mx-auto px-4">
+      <!-- Logo and Contact Info -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Column 1: Logo and Contact -->
+        <div class="animate fade-in">
+          <img
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iv-logo-2017-white-bKnH2Y0XBCnCcGPvkaRyoUyu1J1pD5.png"
+            alt="Iglesia Vida Logo" class="logo-white mb-6">
+          <div class="space-y-2">
+            <p class="text-lg">Iglesia Vida - Chandler, Arizona</p>
+            <p class="text-heaven">3002 N Arizona Ave. #5</p>
+            <p class="text-heaven">Chandler, Arizona 85225</p>
+            <p class="text-heaven"><a href="mailto:info@iglesiavidaaz.com">info@iglesiavida.org</a></p>
+            <p class="text-heaven">(480) 758-4620</p>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="animate fade-in delay-200">
+          <h3 class="text-xl font-bold mb-4">Enlaces Rápidos</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-heaven hover:text-white">Nosotros</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">Grupos Vida</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">Eventos</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">Conectar</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Next Steps -->
+        <div class="animate fade-in delay-400">
+          <h3 class="text-xl font-bold mb-4">Próximos Pasos</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-heaven hover:text-white">Planea tu Visita</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">He Dicidido</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">Bautismos</a></li>
+            <li><a href="#" class="text-heaven hover:text-white">Dar</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Service Times -->
+        <div class="animate fade-in delay-600">
+          <h3 class="text-xl font-bold mb-4">Horario de Servicios</h3>
+          <div class="space-y-2">
+            <p class="text-heaven">Domingos</p>
+            <p class="text-white">10:00 AM y 12:00 PM</p>
+          </div>
+          <div class="flex space-x-4 mt-6">
+            <a href="#" class="text-heaven hover:text-white">
+              <i class='bx bxl-facebook text-2xl'></i>
+            </a>
+            <a href="#" class="text-heaven hover:text-white">
+              <i class='bx bxl-instagram text-2xl'></i>
+            </a>
+            <a href="#" class="text-heaven hover:text-white">
+              <i class='bx bxl-youtube text-2xl'></i>
+            </a>
+            <a href="#" class="text-heaven hover:text-white">
+              <i class='bx bxl-whatsapp text-2xl'></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="pt-8 border-t border-heaven/30 text-center">
+        <p class="animate slide-up delay-400">© <span id="current-year"></span> Iglesia Vida - Chandler, Arizona. Todos
+          los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    const body = document.body;
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('active');
+      body.style.overflow = 'hidden'; // Prevenir scroll cuando el menú está abierto
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('active');
+      body.style.overflow = ''; // Restaurar scroll
+    }
+
+    mobileMenuButton.addEventListener('click', openMobileMenu);
+    mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+    // Cerrar el menú al hacer clic en un enlace
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-links a');
+    mobileMenuLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 10) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Animaciones al hacer scroll
+    document.addEventListener('DOMContentLoaded', function () {
+      // Activar animaciones iniciales que están en la vista
+      const animateHero = document.querySelectorAll('.hero-section .animate');
+      animateHero.forEach(element => {
+        element.classList.add('active');
+      });
+
+      // Configurar el Intersection Observer para las demás animaciones
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            // Una vez que la animación se ha activado, dejamos de observar el elemento
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null, // viewport
+        threshold: 0.1, // 10% del elemento visible
+        rootMargin: '-50px' // Activar un poco antes de que el elemento sea visible
+      });
+
+      // Observar todos los elementos con la clase 'animate' excepto los del hero
+      const animateElements = document.querySelectorAll('.animate:not(.hero-section .animate)');
+      animateElements.forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
+</body>
+
+</html>
